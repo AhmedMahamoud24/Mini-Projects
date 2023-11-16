@@ -139,3 +139,41 @@ To get started with the Fruit Management System, follow these steps:
 
 
 
+## MiniProject 5
+
+# FruitApp
+
+FruitApp is a simple React web application that allows you to manage a list of fruits. You can add new fruits, edit their names, and delete fruits from the list. This application demonstrates various React concepts and features, including JSX syntax, functional and class components, props and state management, event handling, conditional rendering, and working with lists and keys.
+
+## New Functionalities
+
+### 1. Edit Fruits
+You can now edit the names of existing fruits in the list. Click the "Edit" button next to a fruit, and you'll be able to modify its name. Click the "Save" button to save your changes.
+
+### 2. Delete Fruits
+You can delete fruits from the list by clicking the "Delete" button next to a fruit. The fruit will be removed from the list.
+
+### 3. Conditional Rendering
+The application uses conditional rendering to show/hide elements. For example, the "Edit" and "Save" buttons are displayed conditionally based on whether you're editing a fruit or not.
+
+### 4. Lists and Keys
+The list of fruits is rendered using proper keys to ensure efficient React rendering.
+
+## How to Run
+
+To run FruitApp locally, follow these steps:
+
+## Navigate to the project directory:
+
+- cd FruitApp
+- npm start
+- Open your web browser and go to http://localhost:3000 to access the Fruit Management app.
+## Install dependencies:
+
+
+## Technologies Used
+
+
+- React: JavaScript library for building user interfaces.
+- JavaScript: Programming language used for application logic.
+- HTML/CSS: Markup and styling for the user interface.
