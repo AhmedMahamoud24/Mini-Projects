@@ -177,3 +177,32 @@ To run FruitApp locally, follow these steps:
 - React: JavaScript library for building user interfaces.
 - JavaScript: Programming language used for application logic.
 - HTML/CSS: Markup and styling for the user interface.
+
+
+## MiniProject6
+
+# Fruit Tracker
+
+
+
+The Fruit Tracker is a simple React application that allows you to track and display a list of fruits. It consists of a custom hook called `useFruitTracker` for managing the list of fruits and a component named `FruitTracker` for displaying and interacting with the list.
+
+## Features
+
+- Add fruits to the list.
+- Display the list of fruits.
+- Automatically update the document title with the number of fruits in the list.
+
+
+
+### Prerequisites
+
+Make sure you have Node.js and npm (installed on your system.
+### Navigate to the project directory:
+
+-cd fruit-tracker
+## Install the required dependencies:
+- npm install
+- npm start
+
+
