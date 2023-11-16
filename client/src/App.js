@@ -1,79 +1,25 @@
-// client/src/App.js
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-function App() {
+function FruitTracker() {
   const [fruits, setFruits] = useState([]);
-  const [newFruit, setNewFruit] = useState("");
-  const [showEditInput, setShowEditInput] = useState(false);
-  const [editedIndex, setEditedIndex] = useState(null);
-  const [editedFruit, setEditedFruit] = useState("");
 
-  const handleAddFruit = () => {
-    if (newFruit.trim() !== "") {
-      setFruits([...fruits, newFruit]);
-      setNewFruit("");
-    }
-  };
-
-  const handleEditFruit = (index) => {
-    setShowEditInput(true);
-    setEditedIndex(index);
-    setEditedFruit(fruits[index]);
-  };
-
-  const handleEditFruitChange = (value) => {
-    setEditedFruit(value);
-  };
-
-  const handleSaveEdit = () => {
-    const updatedFruits = [...fruits];
-    updatedFruits[editedIndex] = editedFruit;
-    setFruits(updatedFruits);
-    setShowEditInput(false);
-    setEditedIndex(null);
-    setEditedFruit("");
-  };
-
-  const handleDeleteFruit = (index) => {
-    const updatedFruits = [...fruits];
-    updatedFruits.splice(index, 1);
-    setFruits(updatedFruits);
+  const addFruit = (fruit) => {
+    setFruits([...fruits, fruit]);
   };
 
   return (
-    <div className="App">
-      <h1>Fruit List</h1>
-      <input
-        type="text"
-        placeholder="Add fruit"
-        value={newFruit}
-        onChange={(e) => setNewFruit(e.target.value)}
-      />
-      <button onClick={handleAddFruit}>Add</button>
+    <div>
+      <h1>Fruit Tracker</h1>
       <ul>
         {fruits.map((fruit, index) => (
-          <li key={index}>
-            {showEditInput && editedIndex === index ? (
-              <>
-                <input
-                  type="text"
-                  value={editedFruit}
-                  onChange={(e) => handleEditFruitChange(e.target.value)}
-                />
-                <button onClick={handleSaveEdit}>Save</button>
-              </>
-            ) : (
-              <>
-                {fruit}
-                <button onClick={() => handleEditFruit(index)}>Edit</button>
-                <button onClick={() => handleDeleteFruit(index)}>Delete</button>
-              </>
-            )}
-          </li>
+          <li key={index}>{fruit}</li>
         ))}
       </ul>
+      <button onClick={() => addFruit('Apple')}>Add Apple</button>
+      <button onClick={() => addFruit('Banana')}>Add Banana</button>
+      <button onClick={() => addFruit('Orange')}>Add Orange</button>
     </div>
   );
 }
 
-export default App;
+export default FruitTracker;
