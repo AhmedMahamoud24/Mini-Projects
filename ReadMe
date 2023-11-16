@@ -1,0 +1,31 @@
+FruitApp
+
+Description
+
+FruitApp is a simple Node.js server application that responds with a friendly message when accessed. It's designed to demonstrate basic server setup and response handling in Node.js.
+
+Installation
+Before running FruitApp, make sure you have Node.js installed on your machine.
+
+To set up the project, follow these steps:
+
+Clone the repository or download the project to your local machine.
+Navigate to the FruitApp folder in your terminal or command line.
+There are no additional dependencies to install for this project.
+Usage
+To run the server, follow these steps:
+
+Running the main server (index.js):
+
+Open your terminal or command line interface.
+Navigate to the FruitApp folder.
+Run the command node index.js.
+The server will start, and you should see a message indicating that it is running on http://localhost:3000.
+Access http://localhost:3000 in your web browser to see the welcome message.
+
+Running the simple server (simplesever.js):
+
+Ensure you are still in the FruitApp folder in your terminal or command line.
+Run the command node simplesever.js.
+Similar to the main server, this will start the simple server, and you should see a message indicating that it is running, typically on a specified port (e.g., http://localhost:3000).
+Access the server via the provided URL in your web browser.
