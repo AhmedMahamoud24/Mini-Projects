@@ -1,0 +1,13 @@
+<h1>Welcome to my FruitsApp
+!</h1>
+
+<%# Start of EJS scriptlet for looping through the 'Fruits' array %>
+<% for(i = 0; i < Fruits.length; i++) { %>
+
+  <%# Inside the loop, display the 'name' property of each workout object in an <h1> tag %>
+  <h1><%= Fruits
+[i].name %></h1>
+
+
+<% } %>
+<%# End of EJS scriptlet %>
