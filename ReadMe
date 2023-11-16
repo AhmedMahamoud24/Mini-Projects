@@ -1,3 +1,5 @@
+MiniProject1
+
 FruitApp
 
 Description
@@ -29,3 +31,31 @@ Ensure you are still in the FruitApp folder in your terminal or command line.
 Run the command node simplesever.js.
 Similar to the main server, this will start the simple server, and you should see a message indicating that it is running, typically on a specified port (e.g., http://localhost:3000).
 Access the server via the provided URL in your web browser.
+
+
+
+Mini-Project 2: Node.js Server & REST API - README
+
+What It Does:
+
+This project creates a simple Node.js server that:
+
+Displays the content of a text file (example.txt) on a webpage.
+Provides a REST API endpoint (/api/users) that returns user data in JSON format.
+How to Use
+Setup
+
+Initialize Project: Run npm init -y in your project directory to create package.json.
+Create Text File: Make a file named example.txt and add some sample text.
+Server Script: Write the provided JavaScript code in a file named app.js.
+
+Running the Server:
+
+Run the server with node app.js.
+Access the server via a web browser at http://localhost:3000 to view the text file's content.
+For the REST API, visit http://localhost:3000/api/users to see user data in JSON format.
+
+
+
+
+
