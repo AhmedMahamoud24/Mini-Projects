@@ -71,7 +71,7 @@ app.delete('/api/Fruits/delete/:id', (req, res) => {
 
   if (index !== -1) {
     Fruits.splice(index, 1);
-    res.redirect('/api/Fruits'); // Redirect to Fruits page after deletion
+    res.redirect('/api/Fruits');
   } else {
     res.status(404).send(`Fruits with ID $ {FruitsId} not found.`);
   }
