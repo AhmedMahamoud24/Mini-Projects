@@ -1,0 +1,25 @@
+name: Code Climate Badge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  codeclimate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+
+      - name: Get Code Climate Badge
+        run: echo '[![Code Climate](https://codeclimate.com/github/AhmedMahamoud24/Mini-Projects/badges/gpa.svg)](https://codeclimate.com/github/yourusername/yourrepository)' > README.md
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "Add Code Climate badge"
+          git push
+
