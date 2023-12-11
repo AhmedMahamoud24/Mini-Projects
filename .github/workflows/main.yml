@@ -5,7 +5,7 @@ name: Code Climate Badge
 on:
   push:
     branches:
-      - main1
+      - main
 
 jobs:
   codeclimate:
