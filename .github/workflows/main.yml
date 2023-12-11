@@ -28,5 +28,9 @@ jobs:
           PAT: ${{ secrets.PAT }}
 
       - name: Get Code Climate Badge
+        run: echo '[![Code Climate](https://codeclimate.com/github/AhmedMahamoud24/Mini-Projects/badges/gpa.svg)](https://codeclimate.com/github/AhmedMahamoud24/Mini-Projects)' > README.md
+
+
+      - name: Get Code Climate Badge
         run: echo '[![Code Climate Badge](https://github.com/AhmedMahamoud24/Mini-Projects/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/AhmedMahamoud24/Mini-Projects/actions/workflows/main.yml)
 ' > README.md
