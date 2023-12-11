@@ -1,0 +1,32 @@
+name: Code Climate Badge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  codeclimate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Set up Git repository
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Action"
+          git remote set-url origin https://github.com/${{ github.repository }}.git
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/* || true
+
+      - name: Get Code Climate Badge
+        run: |
+          echo '[![Code Climate](https://codeclimate.com/github/AhmedMahamoud24/Mini-Projects/badges/gpa.svg)](https://codeclimate.com/github/AhmedMahamoud24/Mini-Projects)' > README.md
+        env:
+          PAT: ${{ secrets.PAT }}
