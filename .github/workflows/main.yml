@@ -29,4 +29,3 @@ jobs:
 
       - name: Get Code Climate Badge
         run: echo '[![Code Climate](https://codeclimate.com/github/AhmedMahamoud24/Mini-Projects/badges/gpa.svg)](https://codeclimate.com/github/AhmedMahamoud24/Mini-Projects)' > README.md
-
