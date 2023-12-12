@@ -1,3 +1,69 @@
+
+
+# Fruit Tracker App
+
+## Overview
+The Fruit Tracker App is a web application built with Node.js and Express that allows users to track a list of fruits. It integrates with MongoDB to store fruit data and provides a frontend to interact with the stored data.
+
+## Features
+- Add new fruits to the database.
+- View a list of added fruits.
+- Update the name of an existing fruit.
+- Delete a fruit from the list.
+
+## Prerequisites
+- Node.js
+- MongoDB
+- NPM
+
+## Initial Data Migration
+The initial hardcoded data in the server:
+
+```javascript
+const Fruits = [
+  { id: 1, name: 'Mangos' },
+  { id: 2, name: 'Apples' },
+  { id: 3, name: 'Banana' },
+];
+```
+
+has been migrated to a MongoDB database to ensure data persistence.
+
+## Installation
+1. Ensure MongoDB is running on your local machine.
+2. Clone the repository to your preferred directory.
+3. Navigate to the project directory in the terminal.
+4. Run `npm install` to install all necessary dependencies.
+
+## Running the Server
+Execute `npm start` from the root of the project directory to start the server. By default, the server will run on `http://localhost:3000`.
+
+## Endpoints
+The server offers several RESTful endpoints:
+
+- `GET /`: The root endpoint serving the homepage with options to navigate to the fruits list or add new fruits.
+- `GET /api/Fruits`: Retrieves and displays a list of all fruits from the database.
+- `POST /api/Fruits`: Endpoint to add a new fruit to the database.
+- `PUT /api/Fruits/update/:id`: Updates the details of an existing fruit identified by its ID.
+- `DELETE /api/Fruits/delete/:id`: Removes a fruit from the database using its ID.
+
+## Database Configuration
+The application is configured to connect to MongoDB at `mongodb://localhost:27017/` using the database named `FruitTracker`. Make sure MongoDB is accessible at this URI before running the application.
+
+## Frontend Interaction
+The frontend can interact with the backend through HTTP requests to the provided endpoints. This can be achieved using JavaScript's fetch API or libraries like Axios.
+
+## Views and Templating
+EJS is used as the templating engine to generate the HTML views. Ensure that the `views` directory contains the correct EJS templates.
+
+## Method Override
+The application uses the `method-override` middleware to handle `PUT` and `DELETE` requests from HTML forms, which typically only support `GET` and `POST`.
+
+
+
+This application provides a simple yet robust backend system for tracking fruits with a MongoDB database. For any additional help or information, consult the Express.js and MongoDB documentation.
+```
+=======
 =
 
 
@@ -54,6 +120,7 @@ Mini-Project 8 is an enhancement of the Fruit Tracker application. It transition
 - Make sure MongoDB is running before starting the backend server.
 - The frontend and backend need to be started separately.
 """
+
 
 
 
