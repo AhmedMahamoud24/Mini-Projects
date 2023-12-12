@@ -1,102 +1,90 @@
-const express = require('express');
-const app = express();
-const port = 3000;
-const methodOverride = require('method-override');
+import express from 'express';
+import mongoose from 'mongoose';
+import methodOverride from 'method-override';
+import cors from 'cors';
 
+const app = express();
+const port = 3001;
+
+app.use(cors()); // Use CORS middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 
+// MongoDB and Mongoose setup
+mongoose.connect('mongodb://localhost:27017/FruitTracker', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Could not connect to MongoDB', err));
+
+// Mongoose Schema and Model for Fruit
+const fruitSchema = new mongoose.Schema({
+  name: String
+});
+
+const Fruit = mongoose.model('Fruit', fruitSchema);
+
+// Middleware for logging requests
 app.use((req, res, next) => {
   console.log(`${req.method} request for ${req.url}`);
   next();
 });
 
-const Fruits = [
-  { id: 1, name: 'Mangos' },
-  { id: 2, name: 'Apples' },
-  { id: 3, name: 'Banana' },
-];
+// POST - Add a new fruit
+app.post('/api/fruits', async (req, res) => {
+  try {
+    const newFruit = new Fruit({ name: req.body.name });
+    await newFruit.save();
+    res.redirect('/api/fruits');
+  } catch (err) {
+    res.status(500).send('Error saving to database');
+  }
+});
 
+// GET - Retrieve all fruits
+app.get('/api/fruits', async (req, res) => {
+  try {
+    const fruits = await Fruit.find();
+    res.json({ fruits });
+  } catch (err) {
+    res.status(500).send('Error fetching from database');
+  }
+});
+/*
+
+*/
+// PUT - Update an existing fruit
+app.put('/api/fruits/:id', async (req, res) => {
+  try {
+    const fruit = await Fruit.findByIdAndUpdate(req.params.id, { name: req.body.name }, { new: true });
+    if (!fruit) {
+      return res.status(404).send('Fruit not found');
+    }
+    res.send(fruit);
+  } catch (err) {
+    res.status(500).send('Error updating fruit');
+  }
+});
+
+// DELETE - Delete a fruit
+app.delete('/api/fruits/:id', async (req, res) => {
+  try {
+    const fruit = await Fruit.findByIdAndDelete(req.params.id);
+    if (!fruit) {
+      return res.status(404).send('Fruit not found');
+    }
+    res.send('Fruit deleted');
+  } catch (err) {
+    res.status(500).send('Error deleting fruit');
+  }
+});
+
+// Home route
 app.get('/', (req, res) => {
-  res.send(`<button ><a href="/api/Fruits"> Fruits </a> </button> <button ><a href="/api/Fruits/add"> add Fruits </a> </button> `);
+  res.send(`<button ><a href="/api/fruits"> View Fruits </a> </button> <button ><a href="/api/fruits/add"> Add Fruit </a> </button> `);
 });
 
-app.get('/api/Fruits', (req, res) => {
-  res.render('Fruits.ejs', { Fruits });
-});
-
-app.get('/api/Fruits/add', (req, res) => {
-  res.render('Fruitsform.ejs');
-});
-
-app.get('/api/Fruits/add/:id', (req, res) => {
-  res.render('updatedFruits.ejs');
-});
-
-app.post('/api/Fruits', (req, res) => {
-  console.log(req.body.name);
-
-  const newFruits = {
-    id: Fruits.length + 1,
-    name: req.body.name,
-  };
-
-  Fruits.push(newFruits);
-  res.redirect('/api/Fruits');
-});
-
-// Define a PUT route handler for updating a workout.
-app.put('/api/Fruits/update/:id', (req, res) => {
-  console.log('fired put');
-  const Fruits = parseInt(req.params.id);
-  const updatedName = req.body.name;
-
-  const workout = Fruits.find((w) => w.id === Fruits);
-
-  if (workout) {
-    workout.name = updatedName;
-    res.status(200).send(`Workout with ID $ {Fruits} updated.`);
-  } else {
-    res.status(404).send(`Workout with ID $ {Fruits} not found.`);
-  }
-});
-
-// Define a DELETE route handler for deleting a workout.
-app.delete('/api/Fruits/delete/:id', (req, res) => {
-  const FruitsId = parseInt(req.params.id);
-
-  const index = Fruits.findIndex((w) => w.id === FruitsId);
-
-  if (index !== -1) {
-    Fruits.splice(index, 1);
-    res.redirect('/api/Fruits');
-  } else {
-    res.status(404).send(`Fruits with ID $ {FruitsId} not found.`);
-  }
-});
-
-// Define a POST route handler for /api/Fruitsform
-app.post('/api/Fruitsform', (req, res) => {
-  // Handle the POST request for /api/Fruitsform here
-
-  // Access the form data from req.body
-  const newItemName = req.body.name;
-
-  // Assuming you want to add a new item based on the form data
-  const newItem = {
-    id: Fruits.length + 1,
-    name: newItemName,
-  };
-
-  // Add the new item to the Fruits array
-  Fruits.push(newItem);
-
-  // Redirect to the Fruits page
-  res.redirect('/api/Fruits');
-});
-
+// Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });
