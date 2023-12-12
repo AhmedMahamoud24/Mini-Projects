@@ -1,3 +1,212 @@
+# Mini-Project 2: Node.js Server & REST API
+
+## What It Does
+
+This project creates a simple Node.js server that:
+
+- Displays the content of a text file (example.txt) on a webpage.
+- Provides a REST API endpoint (/api/users) that returns user data in JSON format.
+
+## How to Use
+
+### Setup
+
+- Initialize Project: Run `npm init -y` in your project directory to create package.json.
+- Create Text File: Make a file named `example.txt` and add some sample text.
+- Server Script: Write the provided JavaScript code in a file named `app.js`.
+
+### Running the Server
+
+- Run the server with `node app.js`.
+- Access the server via a web browser at http://localhost:3000 to view the text file's content.
+- For the REST API, visit http://localhost:3000/api/users to see user data in JSON format.
+
+# Mini Project 3: Fruit Management
+
+This mini project demonstrates a basic web application for managing fruits. You can view a list of fruits, add new fruits, update existing fruits, and delete fruits.
+
+## Prerequisites
+
+Before running the project, make sure you have the following installed:
+
+- Node.js: You can download it [here](https://nodejs.org/).
+
+## Getting Started
+
+Follow these steps to run the project:
+
+1. Navigate to the project directory:
+
+
+cd FruitsApp
+
+## Install dependencies:
+
+npm install
+npm install express
+npm install -g nodemon
+npm install ejs
+
+## Start the application:
+
+- nodemon index.js
+
+- Open your web browser and go to http://localhost:3000 to access the Fruit Management app.
+
+## How to Use
+- Click the "Fruits" button to view the list of fruits.
+- Click the "Add Fruits" button to add new fruits.
+- To update a fruit, click its name and enter the new name in the form.
+
+
+```markdown
+# MiniProject4 - Fruit Management System
+
+The Fruit Management System is a simple web application built with Node.js and Express that allows users to manage a list of fruits. Users can add new fruits, update their names, and delete fruits from the list.
+
+## Prerequisites
+
+Before using the Fruit Management System, make sure you have the following prerequisites installed on your machine:
+
+## Requirements
+- Node.js
+- MongoDB
+- React
+
+## Setup and Installation
+1. **Clone the Repository**:
+
+
+2. **Backend Setup**:
+- Navigate to the `backend/fruitapp` directory.
+- Install dependencies:
+```
+npm install
+```
+- Ensure MongoDB is installed and running on your system.
+- Start the backend server:
+```
+npm start
+```
+
+3. **Frontend Setup**:
+- Navigate to the `frontend` directory.
+- Install dependencies:
+```
+npm install
+```
+- Start the React application:
+```
+npm start
+```
+
+## Running the Application
+- The backend server will be running on `http://localhost:3001`.
+- Access the frontend application through `http://localhost:3000` in your web browser.
+
+## Additional Notes
+- Make sure MongoDB is running before starting the backend server.
+- The frontend and backend need to be started separately.
+"""
+- Nodemon (for auto-reloading the server)
+
+## Getting Started
+
+To get started with the Fruit Management System, follow these steps:
+
+1. Clone this repository to your local machine.
+
+2. Navigate to the project folder.
+
+3. Install the required dependencies.
+
+4. Start the server.
+
+5. Access the application in your browser at http://localhost:3000.
+
+## Application Functionality
+
+### Home Page
+
+- Click the "Fruits" button to view the list of fruits.
+- Click the "Add Fruits" button to add a new fruit.
+
+### Fruits Page
+
+- The Fruits page displays a list of fruits with their names.
+- Click the "Add Fruits" button to add a new fruit to the list.
+- Click the "Update" button next to a fruit to update its name.
+- Click the "Delete" button next to a fruit to remove it from the list.
+
+
+
+
+
+## MiniProject 5
+
+# FruitApp
+
+FruitApp is a simple React web application that allows you to manage a list of fruits. You can add new fruits, edit their names, and delete fruits from the list. This application demonstrates various React concepts and features, including JSX syntax, functional and class components, props and state management, event handling, conditional rendering, and working with lists and keys.
+
+## New Functionalities
+
+### 1. Edit Fruits
+You can now edit the names of existing fruits in the list. Click the "Edit" button next to a fruit, and you'll be able to modify its name. Click the "Save" button to save your changes.
+
+### 2. Delete Fruits
+You can delete fruits from the list by clicking the "Delete" button next to a fruit. The fruit will be removed from the list.
+
+### 3. Conditional Rendering
+The application uses conditional rendering to show/hide elements. For example, the "Edit" and "Save" buttons are displayed conditionally based on whether you're editing a fruit or not.
+
+### 4. Lists and Keys
+The list of fruits is rendered using proper keys to ensure efficient React rendering.
+
+## How to Run
+
+To run FruitApp locally, follow these steps:
+
+## Navigate to the project directory:
+
+- cd FruitApp
+- npm start
+- Open your web browser and go to http://localhost:3000 to access the Fruit Management app.
+## Install dependencies:
+
+
+## Technologies Used
+
+
+- React: JavaScript library for building user interfaces.
+- JavaScript: Programming language used for application logic.
+- HTML/CSS: Markup and styling for the user interface.
+
+
+## MiniProject6
+
+# Fruit Tracker
+
+
+
+The Fruit Tracker is a simple React application that allows you to track and display a list of fruits. It consists of a custom hook called `useFruitTracker` for managing the list of fruits and a component named `FruitTracker` for displaying and interacting with the list.
+
+## Features
+
+- Add fruits to the list.
+- Display the list of fruits.
+- Automatically update the document title with the number of fruits in the list.
+
+
+
+### Prerequisites
+
+Make sure you have Node.js and npm (installed on your system.
+### Navigate to the project directory:
+
+-cd fruit-tracker
+## Install the required dependencies:
+- npm install
+- npm start
 
 
 # Fruit Tracker App
