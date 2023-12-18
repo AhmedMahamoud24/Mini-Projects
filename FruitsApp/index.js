@@ -17,7 +17,6 @@ app.use(methodOverride('_method'));
 let db;
 let fruitsCollection;
 
-// Connect to MongoDB
 MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
   if (err) throw err;
   console.log('Connected to MongoDB');
@@ -25,13 +24,12 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
   fruitsCollection = db.collection('fruits');
 });
 
-// Middleware for logging requests
+
 app.use((req, res, next) => {
   console.log(`${req.method} request for ${req.url}`);
   next();
 });
 
-// POST - Add a new fruit
 app.post('/api/fruits', async (req, res) => {
   try {
     await fruitsCollection.insertOne({ name: req.body.name });
@@ -41,7 +39,6 @@ app.post('/api/fruits', async (req, res) => {
   }
 });
 
-// GET - Retrieve all fruits
 app.get('/api/fruits', async (req, res) => {
   try {
     const fruits = await fruitsCollection.find().toArray();
@@ -51,7 +48,6 @@ app.get('/api/fruits', async (req, res) => {
   }
 });
 
-// PUT - Update an existing fruit
 app.put('/api/fruits/:id', async (req, res) => {
   try {
     const result = await fruitsCollection.findOneAndUpdate(
@@ -68,7 +64,6 @@ app.put('/api/fruits/:id', async (req, res) => {
   }
 });
 
-// DELETE - Delete a fruit
 app.delete('/api/fruits/:id', async (req, res) => {
   try {
     const result = await fruitsCollection.deleteOne({ _id: new ObjectId(req.params.id) });
@@ -81,12 +76,10 @@ app.delete('/api/fruits/:id', async (req, res) => {
   }
 });
 
-// Home route
 app.get('/', (req, res) => {
   res.send('<button><a href="/api/fruits">View Fruits</a></button> <button><a href="/api/fruits/add">Add Fruit</a></button>');
 });
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });
