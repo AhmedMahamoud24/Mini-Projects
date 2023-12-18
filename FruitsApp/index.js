@@ -1,28 +1,29 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import { MongoClient } from 'mongodb';
 import methodOverride from 'method-override';
 import cors from 'cors';
 
 const app = express();
 const port = 3001;
+const url = 'mongodb://localhost:27017';
+const dbName = 'FruitTracker';
 
-app.use(cors()); // Use CORS middleware
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 
-// MongoDB and Mongoose setup
-mongoose.connect('mongodb://localhost:27017/FruitTracker', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Could not connect to MongoDB', err));
+let db;
+let fruitsCollection;
 
-// Mongoose Schema and Model for Fruit
-const fruitSchema = new mongoose.Schema({
-  name: String
+// Connect to MongoDB
+MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+  if (err) throw err;
+  console.log('Connected to MongoDB');
+  db = client.db(dbName);
+  fruitsCollection = db.collection('fruits');
 });
-
-const Fruit = mongoose.model('Fruit', fruitSchema);
 
 // Middleware for logging requests
 app.use((req, res, next) => {
@@ -33,8 +34,7 @@ app.use((req, res, next) => {
 // POST - Add a new fruit
 app.post('/api/fruits', async (req, res) => {
   try {
-    const newFruit = new Fruit({ name: req.body.name });
-    await newFruit.save();
+    await fruitsCollection.insertOne({ name: req.body.name });
     res.redirect('/api/fruits');
   } catch (err) {
     res.status(500).send('Error saving to database');
@@ -44,23 +44,25 @@ app.post('/api/fruits', async (req, res) => {
 // GET - Retrieve all fruits
 app.get('/api/fruits', async (req, res) => {
   try {
-    const fruits = await Fruit.find();
+    const fruits = await fruitsCollection.find().toArray();
     res.json({ fruits });
   } catch (err) {
     res.status(500).send('Error fetching from database');
   }
 });
-/*
 
-*/
 // PUT - Update an existing fruit
 app.put('/api/fruits/:id', async (req, res) => {
   try {
-    const fruit = await Fruit.findByIdAndUpdate(req.params.id, { name: req.body.name }, { new: true });
-    if (!fruit) {
+    const result = await fruitsCollection.findOneAndUpdate(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { name: req.body.name } },
+      { returnDocument: 'after' }
+    );
+    if (!result.value) {
       return res.status(404).send('Fruit not found');
     }
-    res.send(fruit);
+    res.send(result.value);
   } catch (err) {
     res.status(500).send('Error updating fruit');
   }
@@ -69,8 +71,8 @@ app.put('/api/fruits/:id', async (req, res) => {
 // DELETE - Delete a fruit
 app.delete('/api/fruits/:id', async (req, res) => {
   try {
-    const fruit = await Fruit.findByIdAndDelete(req.params.id);
-    if (!fruit) {
+    const result = await fruitsCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 0) {
       return res.status(404).send('Fruit not found');
     }
     res.send('Fruit deleted');
@@ -81,7 +83,7 @@ app.delete('/api/fruits/:id', async (req, res) => {
 
 // Home route
 app.get('/', (req, res) => {
-  res.send(`<button ><a href="/api/fruits"> View Fruits </a> </button> <button ><a href="/api/fruits/add"> Add Fruit </a> </button> `);
+  res.send('<button><a href="/api/fruits">View Fruits</a></button> <button><a href="/api/fruits/add">Add Fruit</a></button>');
 });
 
 // Start the server
